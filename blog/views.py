@@ -8,8 +8,8 @@ def starting_page(request):
 
 
 def posts(request):
-    pass
+    return render(request, "blog/all-posts.html")
 
 def post_details(request):
-    pass
+    return render(request, "blog/post-detail.html")
 

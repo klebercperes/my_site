@@ -1,14 +1,66 @@
 {% extends "base.html" %}
-{% block title %}Blog{% endblock %}
+{% load static %}
+
+
+{% block title %}
+    My Blog
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "blog/index.css" %}">
+{% endblock %}
+
+
 {% block content %}
-    <h2>Blog</h2>
-    <p>Welcome to my blog. Check out my latest posts below.</p>
-    <ul>
-        {% for post in posts %}
+<header id="main-navigation">
+    <h1><a href="">Kleber's 'Blog Page</a></h1>
+    <nav>
+        <ul>
             <li>
-                <h3><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
-                <p>{{ post.content }}</p>
+                <a href="">All Posts</a>
             </li>
-        {% endfor %}
+        </ul>
+    </nav>
+</header>
+
+<section id="Welcome">
+    <header>
+        <img src="" alt="Kleber - The autor of this blog">
+        <h2>Kleber's Blog'</h2>
+    </header>
+    <p>
+        This is a blog about my life, my thoughts, my experiences and my projects. I hope you enjoy it. Feel free to leave a comment or send me a message. I would love to hear from you. Thanks for stopping by!
+    </p>
+
+</section>
+
+<section id="latest-posts">
+    <header>
+        <h2>My Latest thoughts</h2>
+    </header>
+    <ul>
+        <li>
+            <article class="post">
+                <a href=""><img src="" alt="Mountain Hiking"></a>
+                    <div class="post__content">
+                        <h3><a href="">Mountain Hiking</a></h3>
+                        <a href=""><p>
+                            There is nothing like hiking in the mountains. The fresh air, the beautiful views, the sense of freedom. I love it. I try to go hiking as often as I can. It's my way of escaping the hustle and bustle of everyday life.
+                        </p></a>
+                    </div>
+            </article>
+        </li>
     </ul>
+</section>
+
+<section id="about">
+    <h2>What I do</h2>
+    <p>
+        I am a web developer. I love creating websites and web applications. I am passionate about technology and I am always looking for new ways to improve my skills. I am constantly learning and growing as a developer. I am excited about the future and all the possibilities that it holds.
+    </p>
+    <p>
+        In my free time, I enjoy hiking, reading, and spending time with my family. I am also a big fan of coffee and I love trying out new coffee shops. I am always on the lookout for the perfect cup of coffee.
+    </p>
+</section>
+
 {% endblock %}
