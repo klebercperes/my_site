@@ -10,23 +10,17 @@
 {% endblock %} 
 
 {% block content %}
-    <section>
+    <section id="all-posts">
         <h2>My Collected Posts</h2>
         <ul>
-            <li>
-                <article>
-                    {% include "blog/includes/post.html"%}
-                    {% include "blog/includes/post.html"%}
-                    {% include "blog/includes/post.html"%}
-                    {% include "blog/includes/post.html"%}
-                    {% include "blog/includes/post.html"%}
-                    {% include "blog/includes/post.html"%}
-                    {% include "blog/includes/post.html"%}
+            {% include "blog/includes/post.html"%}
+            {% include "blog/includes/post.html"%}
+            {% include "blog/includes/post.html"%}
+            {% include "blog/includes/post.html"%}
+            {% include "blog/includes/post.html"%}
+            {% include "blog/includes/post.html"%}
 
-                </article>
-
-            </li>
-        </ul>
+        </ul>    
 
     </section>
 
