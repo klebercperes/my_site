@@ -79,7 +79,6 @@ def get_date(post):
 
 
 # Create your views here.
-
 def starting_page(request):
     sorted_posts = sorted(all_posts, key=get_date) #Sort posts by date
     latest_posts = sorted_posts[-3:] #Get last three posts
