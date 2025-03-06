@@ -89,7 +89,7 @@ def starting_page(request):
 
 def posts(request):
     posts = Post.objects.all() #Fetch all posts from the database
-    return render(request, "blog/all-posts.html", {"posts":posts}) #Pass posts to template.
+    return render(request, "blog/all-posts.html", {"all_posts":all_posts}) #Pass posts to template.
 
 def post_detail(request, slug):
     return render(request, "blog/post-detail.html")
