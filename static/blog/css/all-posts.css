@@ -1,0 +1,125 @@
+body {
+  background-color: #e7e7e7;
+}
+
+
+#all-posts {
+  margin: 7rem auto;
+  width: 90%;
+  max-width: 60rem;
+}
+
+#all-posts h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2e2e2e;
+  margin: 3rem 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.post img {
+  width: 7rem;
+  height: 7rem;
+}
+
+.post a {
+  height: 22rem;
+  transform-origin: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  background-color: white;
+}
+
+/* All posts page */
+.posts-header {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.posts-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 1rem;
+}
+
+.posts-header p {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Post grid */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.post-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-item .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.post-item .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--dark-color);
+}
+
+.post-item .card-text {
+    color: var(--secondary-color);
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.post-item .card-footer {
+    background: none;
+    border-top: none;
+    padding: 1rem;
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--secondary-color);
+    font-size: 0.875rem;
+}
+
+.post-meta i {
+    margin-right: 0.25rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .posts-header h1 {
+        font-size: 2rem;
+    }
+
+    .post-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .post-item .card-img-top {
+        height: 180px;
+    }
+}

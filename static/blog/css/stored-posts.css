@@ -1,0 +1,148 @@
+body {
+  background-color: #e7e7e7;
+}
+
+#stored-posts {
+  margin: 3rem auto 3rem auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 90rem;
+  border-radius: 16px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#stored-posts h1 {
+  color: #2e2e2e;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#stored-posts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+  gap: 2rem;
+}
+
+#stored-posts li {
+  margin: 0;
+}
+
+#stored-posts .post {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#stored-posts .post a {
+  height: 100%;
+  transform-origin: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  background-color: white;
+  text-decoration: none;
+  color: #2e2e2e;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#stored-posts .post a:hover,
+#stored-posts .post a:active {
+  transform: scale(1.05);
+  background-color: #390281;
+  color: white;
+}
+
+#stored-posts .post img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
+
+#stored-posts .post__content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 4rem;
+}
+
+#stored-posts .post h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+#stored-posts .post p {
+  margin: 0;
+  color: #666666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+#stored-posts .post:hover p,
+#stored-posts .post:active p {
+  color: #e4e4e4;
+}
+
+#stored-posts p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666666;
+  margin: 2rem 0;
+}
+
+.remove-form {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 1;
+  width: auto;
+}
+
+.btn-remove {
+  background-color: #390281;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-width: 100px;
+}
+
+.btn-remove:hover {
+  background-color: #cac9cb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-remove:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #stored-posts ul {
+    grid-template-columns: 1fr;
+  }
+  
+  #stored-posts {
+    padding: 1.5rem;
+  }
+  
+  #stored-posts h1 {
+    font-size: 2rem;
+  }
+} 

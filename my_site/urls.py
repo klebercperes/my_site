@@ -16,9 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from django.http import HttpResponse
 
+def health_check(request):
+    return HttpResponse("OK")
+
+# Configure admin site
+admin.site.site_header = 'My Site Administration'
+admin.site.site_title = 'My Site Admin'
+admin.site.index_title = 'Welcome to My Site Administration'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include('blog.urls')), #http://localhost:80000
-]
+    path('', include('blog.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('auth/', include('authentication.urls', namespace='authentication')),
+    path('health/', health_check, name='health_check'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

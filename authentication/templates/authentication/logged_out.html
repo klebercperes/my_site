@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Logged Out</h2>
+                    <p class="text-center">You have been successfully logged out.</p>
+                    <div class="text-center mt-4">
+                        <a href="{% url 'authentication:login' %}" class="btn btn-primary me-2">Log in again</a>
+                        <a href="{% url 'starting-page' %}" class="btn btn-outline-secondary">Return to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,33 +1,120 @@
-{% extends "base.html"%}
+{% extends "blog/base.html"%}
 {% load static %}
 
-{% block title %}
+{% block page_title %}
     {{ post.title }}
-{%endblock%}
+{% endblock %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static "blog/post-detail.css" %}">
+    <link rel="stylesheet" href="{% static 'blog/css/post-detail.css' %}">
 {% endblock %} 
 
 {% block content %}
-    <section id="summary">
-        <h2>{{ post.title }}</h2>
-        <div>
-            {% for tag in post_tags %}
-            <span class="tag">{{ tag.caption }}</span>
-            {% endfor%}
+<div class="container">
+    {% if comment_form.errors %}
+        <div id="error-message" class="alert alert-danger">
+            <h2>Invalid Input</h2>
+            <p>Please check the comment form and try again.</p>
+            <a href="#comment-form" class="btn btn-outline-danger">Fix</a>
         </div>
-        <article>
-            <img src="{% static "blog/images/"|add:post.image_name %}" alt="Post Title">
-            <address>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></address>
-            <div>
-                Last update on <time>{{ post.date|date:"d M Y"}}</time>
+    {% endif %}
+
+    <section id="summary" class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">{{ post.title }}</h2>
+            <div class="tags mb-3">
+                {% for tag in post_tags %}
+                    <span class="tag badge bg-secondary">{{ tag.caption }}</span>
+                {% endfor %}
             </div>
-        </article>
+            <article class="position-relative">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image img-fluid rounded mb-3" onclick="openLightbox(this)">
+                {% endif %}
+                <div id="read-later" class="position-absolute top-0 end-0 m-3">
+                    <form action="{% url 'read-later' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ post.id }}">
+                        <button type="submit" class="btn {% if is_saved %}btn-outline-danger{% else %}btn-outline-primary{% endif %}">
+                            {% if is_saved %}Remove from Saved Posts{% else %}Save for Later{% endif %}
+                        </button>
+                    </form>
+                </div>
+                <div class="meta-info">
+                    <address class="fw-bold text-secondary mb-2">By {{ post.author.username }}</address>
+                    <div class="text-muted">
+                        Last updated on <time>{{ post.date|date:"d M Y" }}</time>
+                    </div>
+                </div>
+            </article>
+        </div>
     </section>
 
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Full size image">
+    </div>
+
     <main>
-       {{ post.content|linebreaks}}
+        <div class="card">
+            <div class="card-body">
+                {{ post.content|linebreaks }}
+            </div>
+        </div>
     </main>
 
-{% endblock%}
+    <section id="comments" class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Comments</h2>
+            <ul class="list-unstyled">
+                {% for comment in comments %}
+                    <li class="comment-item mb-4 p-3 bg-light rounded">
+                        <div class="comment-header d-flex justify-content-between align-items-center mb-2">
+                            <h3 class="h5 mb-0">{{ comment.user.username }}</h3>
+                            <time class="comment-meta text-muted small">{{ comment.created_at|date:"M d, Y H:i" }}</time>
+                        </div>
+                        <p class="comment-text mb-2">{{ comment.text|linebreaks }}</p>
+                        {% if comment.user == user %}
+                            <form action="{% url 'delete-comment' post.slug comment.id %}" method="POST" class="text-end">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                            </form>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <section id="comment-form" class="card">
+        <div class="card-body">
+            <h2 class="card-title mb-4">Your Comment</h2>
+            <form action="{% url "post-detail-page" post.slug %}" method="POST">
+                {% csrf_token %}
+                {% for form_field in comment_form %}
+                    <div class="form-group mb-3 {% if form_field.errors %}is-invalid{% endif %}">
+                        {{ form_field.label_tag }}
+                        {{ form_field }}
+                        {% if form_field.errors %}
+                            <div class="invalid-feedback">
+                                {{ form_field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Save Comment</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<script>
+    function openLightbox(img) {
+        document.getElementById('lightbox').style.display = 'flex';
+        document.getElementById('lightbox-img').src = img.src;
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+</script>
+{% endblock %}
